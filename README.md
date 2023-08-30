@@ -31,3 +31,44 @@ ___
 - Написать понятный и поддерживаемый код для каждой задачи 
 - Сделать по 1 отдельному PR с решением для каждой задачи
 - Прислать ссылку на своё решение
+  
+## Quick start
+
+1. Clone this repo:
+    ```
+    git clone https://github.com/polubil/R4C-test -b task1
+    ```
+
+2. Create and activate a venv:
+   
+   ```
+   cd R4C-test
+   python -m venv venv
+   ./venv/Scripts/Activate | source ./venv/Scripts/Activate.sh
+   ```
+3. Install dependencies:
+   
+   ```
+   pip install -r requirements.txt
+   ```
+
+4. Make migrations and migrate:
+    
+   ```
+   py manage.py makemigrations
+   py manage.py migrate
+   ```
+5. Start the django server:
+    
+   ```
+   py manage.py runserver
+   ```
+
+
+## Usage
+
+1. Send POST-request to 'api/robots/new' with following format data in request body:
+   ```
+   {"model":"Il","version":"Ya","created":"2003-05-26 10:30:00"}
+   ```
+
