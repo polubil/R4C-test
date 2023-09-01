@@ -36,7 +36,7 @@ ___
 
 1. Clone this repo:
     ```
-    git clone https://github.com/polubil/R4C-test -b task1
+    git clone https://github.com/polubil/R4C-test -b task1-dev
     ```
 
 2. Create and activate a venv:
