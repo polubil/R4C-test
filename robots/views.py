@@ -1,3 +1,22 @@
-from django.shortcuts import render
+from django.views import View
+from django.http.response import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from robots.forms import RobotForm
+from django.utils.decorators import method_decorator
 
-# Create your views here.
+
+@method_decorator(csrf_exempt, name="dispatch")
+class AddRobotView(View):
+    http_method_names = ["post"]
+
+    def post(self, request):
+        robot = json.loads(request.body)
+        robot["serial"] = f'{robot.get("model")}-{robot.get("version")}'  # Формируем серийный номер по ТЗ.
+        # Пихаем в форму данные, которые пришли с запросом. Нужно для валидации встроенными методами Django.
+        robot = RobotForm(robot)
+        if robot.is_valid():
+            robot.save()
+            return JsonResponse(robot.cleaned_data, status=201)
+        else:
+            return JsonResponse(robot.errors, status=422)
