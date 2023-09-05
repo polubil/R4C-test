@@ -32,7 +32,7 @@ class ReportView(View):
 
 
 def download_report(request, filename: str) -> FileResponse:
-    path_to_file = os.path.join(settings.REPORT_DIR, filename)  # Путь к файлу от корня статических файлов
-    response = FileResponse(open(path_to_file, 'rb'))
-    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    # Путь к файлу, название директории с отчетом указывается в settings.py
+    path_to_file = os.path.join(settings.REPORT_DIR, filename)
+    response = FileResponse(open(path_to_file, 'rb'), as_attachment=True, filename=filename)
     return response
